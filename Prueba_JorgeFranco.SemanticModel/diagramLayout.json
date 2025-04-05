@@ -10,8 +10,8 @@
       "nodes": [
         {
           "location": {
-            "x": 650.75860035707979,
-            "y": 351.96089158745576
+            "x": 654.74410590548189,
+            "y": 349.30388788852076
           },
           "nodeIndex": "DIM CLIENTE",
           "nodeLineageTag": "261059f3-002e-49fc-9f8a-16cc0da25695",
@@ -25,7 +25,7 @@
         {
           "location": {
             "x": 71.256029591478722,
-            "y": 253.25819259233509
+            "y": 306.39826657103191
           },
           "nodeIndex": "DIM PRODUCTO",
           "nodeLineageTag": "a8a399b4-2cd7-4716-8f10-909332e3795f",
@@ -38,8 +38,8 @@
         },
         {
           "location": {
-            "x": 448.05331391441888,
-            "y": 502.72425393891126
+            "x": 295.27560122566558,
+            "y": 559.84983346601041
           },
           "nodeIndex": "DIM TIENDA",
           "nodeLineageTag": "866c0894-c56b-452a-997b-22b117051d5a",
@@ -53,7 +53,7 @@
         {
           "location": {
             "x": 370.73780018578503,
-            "y": 252.53174519875449
+            "y": 305.67181917745131
           },
           "nodeIndex": "FACT VENTAS",
           "nodeLineageTag": "1a3aa265-5557-4147-b845-aa0583d36073",
@@ -66,8 +66,8 @@
         },
         {
           "location": {
-            "x": 308.03291213119917,
-            "y": 106.28014795739367
+            "x": 327.96043987321053,
+            "y": 127.53617754887239
           },
           "nodeIndex": "DIM CALENDARIO",
           "nodeLineageTag": "efc9dd15-2135-477d-a80e-c3fe36477f53",
@@ -77,6 +77,19 @@
           },
           "zIndex": 5,
           "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 710.7248580768478,
+            "y": 18.874303312657027
+          },
+          "nodeIndex": "MEDIDAS",
+          "nodeLineageTag": "95de2438-3620-44b0-b84b-ff1baad57a9e",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas las tablas",

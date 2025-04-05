@@ -104,6 +104,20 @@ table 'DIM PRODUCTO'
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Peso en Kg' = ```
+			
+			    SWITCH('DIM PRODUCTO'[PesoUnidad],
+			    "pounds", 'DIM PRODUCTO'[Peso]*0.45359,
+			    "ounces", 'DIM PRODUCTO'[Peso]*0.028345,
+			    "grams", 'DIM PRODUCTO'[Peso]*0.001, 0)
+			```
+		lineageTag: 5f3de439-ffc8-42c7-b93d-55614774474a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition 'DIM PRODUCTO' = m
 		mode: import
 		queryGroup: Dimensiones

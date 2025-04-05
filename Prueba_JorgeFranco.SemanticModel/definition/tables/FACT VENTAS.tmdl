@@ -118,6 +118,14 @@ table 'FACT VENTAS'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column PesoTotalKg_M = RELATED('DIM PRODUCTO'[Peso en Kg]) * [Cantidad]
+		lineageTag: ec93f5c0-f3a0-4830-9414-12167f4be236
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition 'FACT VENTAS' = m
 		mode: import
 		queryGroup: Hechos

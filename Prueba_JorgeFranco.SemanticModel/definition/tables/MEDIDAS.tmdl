@@ -1,0 +1,83 @@
+table MEDIDAS
+	lineageTag: 95de2438-3620-44b0-b84b-ff1baad57a9e
+
+	measure 'Ventas USD' = ```
+			SUM('FACT VENTAS'[PrecioTotal_M]) 
+			```
+		displayFolder: Medidas Base
+		lineageTag: 20731b49-c56d-4ed4-94c5-02c04e0ae5d8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Costo USD' = ```
+			SUM('FACT VENTAS'[CostoTotal_M]) 
+			```
+		displayFolder: Medidas Base
+		lineageTag: 071311eb-1f13-4e9b-afb3-a2788ae9893c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Margen USD' = DIVIDE([Ventas USD]- [Costo USD], [Ventas USD])
+		displayFolder: Medidas Base
+		lineageTag: 400b72d7-e68d-4e32-847d-621be002b12e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Cantidad = SUM('FACT VENTAS'[Cantidad])
+		displayFolder: Medidas Base
+		lineageTag: 03304720-3ff8-40c0-b86c-c309d7420a2f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Kilogramos = SUM('FACT VENTAS'[PesoTotalKg_M])
+		displayFolder: Medidas Base
+		lineageTag: b3eac20f-1b14-4f34-83d4-1081346a55fd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cantidad Ordenes' = DISTINCTCOUNT('FACT VENTAS'[OrderKey])
+		formatString: 0
+		displayFolder: Medidas Auxiliares
+		lineageTag: 843dcebe-e28a-4615-913e-56ccdea18ede
+
+	measure 'Ticket Promedio' = DIVIDE([Ventas USD], [Cantidad Ordenes])
+		displayFolder: Medidas Base
+		lineageTag: 8bfad642-cde4-4b64-a65e-5957127f3122
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Precio Promedio Kg' = DIVIDE([Ventas USD], [Kilogramos])
+		displayFolder: Medidas Base
+		lineageTag: c33c1dbb-2415-4fc5-9786-732a6b1ac81a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cantidad Clientes' = DISTINCTCOUNT('FACT VENTAS'[CustomerKey])
+		formatString: 0
+		displayFolder: Medidas Auxiliares
+		lineageTag: f236bf41-654f-4c08-bb57-875539bd7c05
+
+	measure 'Venta Promedio Cliente' = DIVIDE([Ventas USD], [Cantidad Clientes])
+		displayFolder: Medidas Base
+		lineageTag: 29c255bf-94d4-4aee-9774-e05b742c2822
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Unidades Promedio Ticket' = DIVIDE([Cantidad], [Cantidad Ordenes])
+		displayFolder: Medidas Base
+		lineageTag: 0be11964-eff0-4c8b-bd3f-68f1bd863735
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition MEDIDAS = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Columna1", type text}}),
+				    #"Columnas quitadas" = Table.RemoveColumns(#"Tipo cambiado",{"Columna1"})
+				in
+				    #"Columnas quitadas"
+
+	annotation PBI_ResultType = Table
+
