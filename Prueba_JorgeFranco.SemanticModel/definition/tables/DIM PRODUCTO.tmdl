@@ -1,0 +1,119 @@
+table 'DIM PRODUCTO'
+	lineageTag: a8a399b4-2cd7-4716-8f10-909332e3795f
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5f9dcea9-d17f-4dfa-a7ba-4190c3a2d059
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductoCodigo
+		dataType: string
+		lineageTag: 7212901e-17ca-490a-83f8-c9716d7847a6
+		summarizeBy: none
+		sourceColumn: ProductoCodigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductoNombre
+		dataType: string
+		lineageTag: f964c1a8-9e41-46a3-a8f2-d476788e8e3a
+		summarizeBy: none
+		sourceColumn: ProductoNombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fabricante
+		dataType: string
+		lineageTag: 376fedd1-8ee6-44f8-b43e-2e5e49942133
+		summarizeBy: none
+		sourceColumn: Fabricante
+
+		annotation SummarizationSetBy = Automatic
+
+	column Marca
+		dataType: string
+		lineageTag: 5e48e979-8e5b-4bad-9e9b-5a250a34ee5e
+		summarizeBy: none
+		sourceColumn: Marca
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: string
+		lineageTag: 6c27e3ad-f917-47bf-9008-4cb69b1109a6
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column Peso
+		dataType: double
+		lineageTag: 824db3dc-7cb5-4745-ac56-53e3eeccf8f3
+		summarizeBy: none
+		sourceColumn: Peso
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PesoUnidad
+		dataType: string
+		lineageTag: 56324c09-f043-4fd1-b969-eae17fd2e530
+		summarizeBy: none
+		sourceColumn: PesoUnidad
+
+		annotation SummarizationSetBy = Automatic
+
+	column Costo
+		dataType: double
+		lineageTag: b61426ef-3770-44eb-a1b4-ba12be751237
+		summarizeBy: none
+		sourceColumn: Costo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Precio
+		dataType: double
+		lineageTag: 3d0848bc-3d3d-41c9-8131-2bf1a7ba1a95
+		summarizeBy: none
+		sourceColumn: Precio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CategoriaNombre
+		dataType: string
+		lineageTag: 970b2f9b-aa3f-4d44-887c-370915667561
+		summarizeBy: none
+		sourceColumn: CategoriaNombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategoria
+		dataType: string
+		lineageTag: 18680e85-ca59-41ae-80fe-b2770923fb8c
+		summarizeBy: none
+		sourceColumn: Subcategoria
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM PRODUCTO' = m
+		mode: import
+		queryGroup: Dimensiones
+		source =
+				let
+				    Origen = Sql.Database(srvName, dbName, [Query="SELECT#(lf)#(tab)p.ProductKey#(lf)#(tab), p.ProductCode ProductoCodigo#(lf)#(tab), p.ProductName ProductoNombre#(lf)#(tab), p.Manufacturer Fabricante#(lf)#(tab), p.Brand Marca#(lf)#(tab), p.Color #(lf)#(tab), p.Weight Peso #(lf)#(tab), p.WeightUnit PesoUnidad#(lf)#(tab), p.Cost Costo#(lf)#(tab), p.Price Precio#(lf)#(tab), c.CategoryName CategoriaNombre#(lf)#(tab), sc.SubCategoryName Subcategoria#(lf)FROM [Data].Product p #(lf)LEFT JOIN [Data].Category c #(lf)ON p.CategoryKey = c.CategoryKey#(lf)LEFT JOIN [Data].SubCategory sc #(lf)ON p.SubCategoryKey = sc.SubCategoryKey;"])
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

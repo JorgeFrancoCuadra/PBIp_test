@@ -1,0 +1,182 @@
+table 'DIM CALENDARIO'
+	lineageTag: efc9dd15-2135-477d-a80e-c3fe36477f53
+
+	column Date
+		formatString: General Date
+		lineageTag: 204c27e6-c33a-4c3c-a517-da11a7277305
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variación
+			isDefault
+			relationship: 6811c39f-ad1f-4b29-8320-32334c916130
+			defaultHierarchy: LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año
+		formatString: 0
+		lineageTag: c20fb698-bad3-4592-8d9f-80a19914fa3f
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Número de Año'
+		lineageTag: 47f8f3b4-cfa4-4d8c-ab32-e033b53093aa
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Número de Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semestre
+		lineageTag: 2c37b526-cd44-4931-a156-356a16e5e675
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Semestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		lineageTag: 1b3ffaed-e357-49c2-87c6-35d0b3b33b13
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes
+		lineageTag: 995eb041-0f9a-4f25-b243-6d3e79e8f2f5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mes Corto'
+		lineageTag: eda7c1b8-893f-4162-be51-815340a920f4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mes Corto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Número de Mes'
+		formatString: 0
+		lineageTag: aed0c098-a53a-4e13-9130-beb343cc3339
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Número de Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Día del Mes'
+		formatString: 0
+		lineageTag: 7648a566-dff6-4e6e-a80b-b27537ae7bb0
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Día del Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Día de la Semana'
+		lineageTag: 7fc5ca46-a693-4bed-a23b-1c035d42409a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Día de la Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Día de la Semana Corto'
+		lineageTag: 5765405b-4110-4585-a56d-962dad51cf60
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Día de la Semana Corto]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Número de Día de la Semana'
+		formatString: 0
+		lineageTag: 11d8c9d6-2dc9-4e22-9561-d62b41915357
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Número de Día de la Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fin de Semana'
+		lineageTag: 70611fb8-73dc-4b21-9fe0-21580765d5f7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fin de Semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año-Mes
+		lineageTag: 78026108-6673-4bc1-83fa-48f9726f0c25
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Año-Mes]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Año-Trimestre
+		lineageTag: 42393503-d958-4ef2-ab46-f1d35a3ebbf0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Año-Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha Completa'
+		lineageTag: 70b8c68a-005b-4ab1-a338-5f85799ef8b1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Fecha Completa]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Día del Año'
+		formatString: 0
+		lineageTag: f38008a8-9964-438f-b91a-5e99ca5c4dc4
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Día del Año]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM CALENDARIO' = calculated
+		mode: import
+		source = ```
+				ADDCOLUMNS (
+				    CALENDAR(MIN('FACT VENTAS'[FechaOrden]), MAX('FACT VENTAS'[FechaEntrega])),  -- Rango de fechas (ajusta según necesidad)
+				    
+				    -- Columnas básicas
+				    "Año", YEAR([Date]),
+				    "Número de Año", "A" & FORMAT([Date], "YYYY"),  -- Ej: "A2023"
+				    "Semestre", "S" & IF(MONTH([Date]) <= 6, 1, 2),  -- S1 o S2
+				    "Trimestre", "T" & FORMAT([Date], "Q"),         -- T1, T2, T3, T4
+				    "Mes", FORMAT([Date], "MMMM"),                  -- "Enero", "Febrero", etc.
+				    "Mes Corto", FORMAT([Date], "MMM"),             -- "Ene", "Feb", etc.
+				    "Número de Mes", MONTH([Date]),                 -- 1 a 12
+				    "Día del Mes", DAY([Date]),                     -- 1 a 31
+				    "Día del Año", DATEDIFF(DATE(YEAR([Date]), 1, 1), [Date], DAY) + 1,
+				    -- Inteligencia de tiempo
+				    "Día de la Semana", FORMAT([Date], "dddd"),      -- "Lunes", "Martes", etc.
+				    "Día de la Semana Corto", FORMAT([Date], "ddd"), -- "Lun", "Mar", etc.
+				    "Número de Día de la Semana", WEEKDAY([Date], 2), -- 1 (Lunes) a 7 (Domingo)
+				    "Fin de Semana", IF(WEEKDAY([Date], 2) > 5, "Sí", "No"),
+				    
+				    -- Columnas útiles para análisis
+				    "Año-Mes", FORMAT([Date], "YYYY-MM"),           -- "2023-01"
+				    "Año-Trimestre", FORMAT([Date], "YYYY") & "-T" & FORMAT([Date], "Q"),
+				    "Fecha Completa", FORMAT([Date], "dd/MM/yyyy")   -- Formato legible
+				)
+				    --CALENDAR(MIN('FACT VENTAS'[FechaOrden]), MAX('FACT VENTAS'[FechaEntrega]))))
+				```
+
+	annotation PBI_Id = 36b7c5069f7a435586b12f7b9dc2d41d
+

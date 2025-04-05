@@ -1,0 +1,74 @@
+table 'DIM TIENDA'
+	lineageTag: 866c0894-c56b-452a-997b-22b117051d5a
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 42bf4316-9483-4944-a0a5-4d9249516526
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaCodigo
+		dataType: int64
+		formatString: 0
+		lineageTag: 07885ecb-71b3-4b90-bd1a-239aacbdf3bd
+		summarizeBy: none
+		sourceColumn: TiendaCodigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaNombre
+		dataType: string
+		lineageTag: d308d7c3-f971-49b6-a0bb-a3b29f213cf9
+		summarizeBy: none
+		sourceColumn: TiendaNombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaEstatus
+		dataType: string
+		lineageTag: 50006aca-57c9-456b-a738-b5b3f000772e
+		summarizeBy: none
+		sourceColumn: TiendaEstatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaCodigoEstado
+		dataType: string
+		lineageTag: cf7c4ddf-c8cc-49a8-bff4-d5e4ea138589
+		summarizeBy: none
+		sourceColumn: TiendaCodigoEstado
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaNombreEstado
+		dataType: string
+		lineageTag: 823dcb78-946c-4247-b062-7cea9244935b
+		summarizeBy: none
+		sourceColumn: TiendaNombreEstado
+
+		annotation SummarizationSetBy = Automatic
+
+	column TiendaPais
+		dataType: string
+		lineageTag: 1704be5a-0128-4fd6-9669-d6c2aaec727b
+		summarizeBy: none
+		sourceColumn: TiendaPais
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM TIENDA' = m
+		mode: import
+		queryGroup: Dimensiones
+		source =
+				let
+				    Origen = Sql.Database(srvName, dbName, [Query="SELECT#(lf)#(tab)s.StoreKey#(lf)#(tab), s.StoreCode TiendaCodigo#(lf)#(tab), s.Description TiendaNombre#(lf)#(tab), ISNULL(s.Status, 'Open') TiendaEstatus#(lf)#(tab), s2.StateCode TiendaCodigoEstado#(lf)#(tab), s2.StateName TiendaNombreEstado#(lf)#(tab), c.CountryName TiendaPais#(lf)FROM [Data].Store s#(lf)#(tab)LEFT JOIN [Data].State s2#(lf)#(tab)ON s.StateKey = s2.StateKey#(lf)#(tab)LEFT JOIN [Data].Country c #(lf)#(tab)ON s2.CountryCode = c.CountryCode"])
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

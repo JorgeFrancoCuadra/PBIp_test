@@ -1,0 +1,133 @@
+table 'FACT VENTAS'
+	lineageTag: 1a3aa265-5557-4147-b845-aa0583d36073
+
+	column OrderKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 117b0ff4-eb61-4e16-8189-6943f556752e
+		summarizeBy: count
+		sourceColumn: OrderKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ef7c6348-cbd9-4d3b-9d98-1ec88c2df59a
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e0deb981-77c5-4b63-8c7d-b4a1883b5242
+		summarizeBy: none
+		sourceColumn: StoreKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyCode
+		dataType: string
+		lineageTag: fad1fa61-7bb4-4eb1-9e7a-9427cd421cd6
+		summarizeBy: none
+		sourceColumn: CurrencyCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bef66572-1d6a-4990-8ce2-77ee8f6be849
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaOrden
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 916d0b73-b7c5-493f-add7-e1a4226e31a0
+		summarizeBy: none
+		sourceColumn: FechaOrden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FechaEntrega
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 20edf855-009f-4712-a808-0f4d370d9e23
+		summarizeBy: none
+		sourceColumn: FechaEntrega
+
+		variation Variación
+			isDefault
+			relationship: fe1fd693-78ab-4e60-b0cb-4952809d0a93
+			defaultHierarchy: LocalDateTable_7958707a-8669-414b-9286-021431e3536c.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cantidad
+		dataType: double
+		lineageTag: 54cfa8d9-a8e6-49da-917f-5075d14d2f66
+		summarizeBy: sum
+		sourceColumn: Cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostoUnitario
+		dataType: double
+		lineageTag: 8a4ca985-aac2-4ff2-aeae-c79b2bfbe039
+		summarizeBy: sum
+		sourceColumn: CostoUnitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrecioUnitario
+		dataType: double
+		lineageTag: 69984dc0-7988-4e26-a1ea-341fa5e0e04b
+		summarizeBy: sum
+		sourceColumn: PrecioUnitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PrecioTotal_M
+		dataType: double
+		lineageTag: aee13661-4c42-4486-adce-e3469ff7b2dc
+		summarizeBy: sum
+		sourceColumn: PrecioTotal_M
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostoTotal_M
+		dataType: double
+		lineageTag: ea525e10-e48c-47cb-93c7-8548d9118be2
+		summarizeBy: sum
+		sourceColumn: CostoTotal_M
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FACT VENTAS' = m
+		mode: import
+		queryGroup: Hechos
+		source =
+				let
+				    Origen = Sql.Database(srvName, dbName, [Query="SELECT#(lf)#(tab)sh.OrderKey#(lf)#(tab), sh.CustomerKey#(lf)#(tab), sh.StoreKey#(lf)#(tab), sh.CurrencyCode#(lf)#(tab), sd.ProductKey #(lf)#(tab), sh.OrderDate FechaOrden#(lf)#(tab), sh.DeliveryDate FechaEntrega#(lf)#(tab), sd.Quantity Cantidad#(lf)#(tab), sd.UnitCost * ce.Exchange CostoUnitario#(lf)#(tab), sd.UnitPrice * ce.Exchange PrecioUnitario#(lf)#(tab), sd.UnitPrice * ce.Exchange * sd.Quantity PrecioTotal_M#(lf)#(tab), sd.UnitCost * ce.Exchange * sd.Quantity CostoTotal_M#(lf)FROM [Data].Sales_Header sh #(lf)#(tab)LEFT JOIN [Data].Sales_Details sd#(lf)#(tab)ON sh.OrderKey = sd.OrderKey#(lf)#(tab)LEFT JOIN [Data].CurrencyExchange ce #(lf)#(tab)ON sh.CurrencyCode = ce.FromCurrency #(lf)#(tab)#(tab)AND OrderDate = ce.[Date]"])
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

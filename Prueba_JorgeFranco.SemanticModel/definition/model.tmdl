@@ -1,9 +1,36 @@
 model Model
 	culture: es-SV
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-SV
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Dimensiones
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Hechos
+
+	annotation PBI_QueryGroupOrder = 1
 
 annotation PBI_ProTooling = ["DevMode"]
 
 annotation PBIDesktopVersion = 2.141.1253.0 (25.03)+74f9999a1e95f78c739f3ea2b96ba340e9ba8729
+
+annotation PBI_QueryOrder = ["srvName","dbName","DIM PRODUCTO","DIM TIENDA","DIM CLIENTE","FACT VENTAS"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+ref table 'DIM PRODUCTO'
+ref table 'DIM TIENDA'
+ref table 'DIM CLIENTE'
+ref table DateTableTemplate_816a2b47-423b-434e-9f6b-0f4d165486da
+ref table LocalDateTable_48bd844d-017f-488a-8887-8693bb5fd6d4
+ref table 'FACT VENTAS'
+ref table LocalDateTable_7958707a-8669-414b-9286-021431e3536c
+ref table 'DIM CALENDARIO'
+ref table LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2
 
 ref cultureInfo es-SV
 

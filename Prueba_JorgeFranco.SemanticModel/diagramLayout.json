@@ -7,9 +7,80 @@
         "x": 0,
         "y": 0
       },
-      "nodes": [],
+      "nodes": [
+        {
+          "location": {
+            "x": 650.75860035707979,
+            "y": 351.96089158745576
+          },
+          "nodeIndex": "DIM CLIENTE",
+          "nodeLineageTag": "261059f3-002e-49fc-9f8a-16cc0da25695",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 71.256029591478722,
+            "y": 253.25819259233509
+          },
+          "nodeIndex": "DIM PRODUCTO",
+          "nodeLineageTag": "a8a399b4-2cd7-4716-8f10-909332e3795f",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 2,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 448.05331391441888,
+            "y": 502.72425393891126
+          },
+          "nodeIndex": "DIM TIENDA",
+          "nodeLineageTag": "866c0894-c56b-452a-997b-22b117051d5a",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3,
+          "expandedHeight": 248
+        },
+        {
+          "location": {
+            "x": 370.73780018578503,
+            "y": 252.53174519875449
+          },
+          "nodeIndex": "FACT VENTAS",
+          "nodeLineageTag": "1a3aa265-5557-4147-b845-aa0583d36073",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 308.03291213119917,
+            "y": 106.28014795739367
+          },
+          "nodeIndex": "DIM CALENDARIO",
+          "nodeLineageTag": "efc9dd15-2135-477d-a80e-c3fe36477f53",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 5,
+          "expandedHeight": 300
+        }
+      ],
       "name": "Todas las tablas",
-      "zoomValue": 100,
+      "zoomValue": 75.272759341726712,
       "pinKeyFieldsToTop": false,
       "showExtraHeaderInfo": false,
       "hideKeyFieldsWhenCollapsed": false,

@@ -1,0 +1,147 @@
+table 'DIM CLIENTE'
+	lineageTag: 261059f3-002e-49fc-9f8a-16cc0da25695
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 81ae79bf-8379-4056-8c88-eb5df14d28a2
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cliente1erNombre
+		dataType: string
+		lineageTag: 99e2a26d-0c27-4cc3-81e3-c7573f0d45b2
+		summarizeBy: none
+		sourceColumn: Cliente1erNombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteInicial2doNombre
+		dataType: string
+		lineageTag: 8991779e-29d8-4e66-b69d-97bb95cd7f6c
+		summarizeBy: none
+		sourceColumn: ClienteInicial2doNombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteApellido
+		dataType: string
+		lineageTag: 3f9bc227-3d5c-454c-bbfc-01f443a023d4
+		summarizeBy: none
+		sourceColumn: ClienteApellido
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteTitulo
+		dataType: string
+		lineageTag: 9ee99d65-05bd-43ac-903d-1d9f5b02f6c5
+		summarizeBy: none
+		sourceColumn: ClienteTitulo
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteGenero
+		dataType: string
+		lineageTag: 2c44c78c-737b-445b-bd7e-6094497dbb8f
+		summarizeBy: none
+		sourceColumn: ClienteGenero
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientePais
+		dataType: string
+		lineageTag: e5d58081-f43e-4e46-82a7-c64aa81a4ccc
+		summarizeBy: none
+		sourceColumn: ClientePais
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteCodigoEstado
+		dataType: string
+		lineageTag: 4a5d12c6-c16c-4326-8fec-77db06961575
+		summarizeBy: none
+		sourceColumn: ClienteCodigoEstado
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteEstado
+		dataType: string
+		lineageTag: e4ab7fa6-beb6-4103-a733-6fbcd7984330
+		summarizeBy: none
+		sourceColumn: ClienteEstado
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteCiudad
+		dataType: string
+		lineageTag: d0a85aed-fa54-44f9-ad3f-c75dbb23ac1a
+		summarizeBy: none
+		sourceColumn: ClienteCiudad
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteDireccion
+		dataType: string
+		lineageTag: fd999f09-31ec-4031-ac56-ff6cfc4437ef
+		summarizeBy: none
+		sourceColumn: ClienteDireccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteCodigoPostal
+		dataType: string
+		lineageTag: e3284acb-7306-4752-bb68-441f91e9cd60
+		summarizeBy: none
+		sourceColumn: ClienteCodigoPostal
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteFeechaNacimiento
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 987b9597-19de-437e-bd92-5ad621e23feb
+		summarizeBy: none
+		sourceColumn: ClienteFeechaNacimiento
+
+		variation Variación
+			isDefault
+			relationship: c82bbeb6-023f-461f-ac7b-467f912a7611
+			defaultHierarchy: LocalDateTable_48bd844d-017f-488a-8887-8693bb5fd6d4.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClienteLatitud
+		dataType: double
+		lineageTag: 1594ae3b-05fc-4c4a-8d67-b7c05f32ce4d
+		summarizeBy: sum
+		sourceColumn: ClienteLatitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ClienteLongitud
+		dataType: double
+		lineageTag: 15557f55-8e82-4a49-886a-2f4347c24934
+		summarizeBy: sum
+		sourceColumn: ClienteLongitud
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'DIM CLIENTE' = m
+		mode: import
+		queryGroup: Dimensiones
+		source =
+				let
+				    Origen = Sql.Database(srvName, dbName, [Query="SELECT#(lf)#(tab)c.CustomerKey#(lf)#(tab), c.GivenName Cliente1erNombre#(lf)#(tab), c.MiddleInitial ClienteInicial2doNombre#(lf)#(tab), c.Surname ClienteApellido#(lf)#(tab), c.Title ClienteTitulo#(lf)#(tab), c.Gender ClienteGenero#(lf)#(tab), c2.CountryName ClientePais#(lf)#(tab), s.StateCode ClienteCodigoEstado#(lf)#(tab), s.StateName ClienteEstado#(lf)#(tab), c.City ClienteCiudad#(lf)#(tab), c.StreetAddress ClienteDireccion#(lf)#(tab), c.ZipCode ClienteCodigoPostal#(lf)#(tab), c.Birthday ClienteFeechaNacimiento#(lf)#(tab), c.Latitude ClienteLatitud#(lf)#(tab), c.Longitude ClienteLongitud#(lf)FROM [Data].Customer c #(lf)#(tab)LEFT JOIN [Data].State s #(lf)#(tab)ON c.StateKey = s.StateKey#(lf)#(tab)LEFT JOIN [Data].Country c2 #(lf)#(tab)ON s.CountryCode = c2.CountryCode;"])
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
