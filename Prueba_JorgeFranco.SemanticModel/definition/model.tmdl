@@ -30,8 +30,8 @@ ref table LocalDateTable_48bd844d-017f-488a-8887-8693bb5fd6d4
 ref table 'FACT VENTAS'
 ref table LocalDateTable_7958707a-8669-414b-9286-021431e3536c
 ref table 'DIM CALENDARIO'
-ref table LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2
 ref table MEDIDAS
+ref table LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2
 
 ref cultureInfo es-SV
 

@@ -20,7 +20,7 @@ relationship AutoDetected_afe086b2-59c3-431c-818b-a92d258911b7
 	fromColumn: 'FACT VENTAS'.CustomerKey
 	toColumn: 'DIM CLIENTE'.CustomerKey
 
-relationship 6811c39f-ad1f-4b29-8320-32334c916130
+relationship ff6d7827-9d0e-4f8a-8295-34ccf3124909
 	joinOnDateBehavior: datePartOnly
 	fromColumn: 'DIM CALENDARIO'.Date
 	toColumn: LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2.Date

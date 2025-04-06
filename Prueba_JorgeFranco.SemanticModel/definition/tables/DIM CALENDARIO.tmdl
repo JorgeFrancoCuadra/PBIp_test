@@ -10,7 +10,7 @@ table 'DIM CALENDARIO'
 
 		variation Variación
 			isDefault
-			relationship: 6811c39f-ad1f-4b29-8320-32334c916130
+			relationship: ff6d7827-9d0e-4f8a-8295-34ccf3124909
 			defaultHierarchy: LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2.'Jerarquía de fechas'
 
 		annotation SummarizationSetBy = Automatic
@@ -152,30 +152,24 @@ table 'DIM CALENDARIO'
 		mode: import
 		source = ```
 				ADDCOLUMNS (
-				    CALENDAR(MIN('FACT VENTAS'[FechaOrden]), MAX('FACT VENTAS'[FechaEntrega])),  -- Rango de fechas (ajusta según necesidad)
-				    
-				    -- Columnas básicas
+				    CALENDAR(MIN('FACT VENTAS'[FechaOrden]), MAX('FACT VENTAS'[FechaEntrega])),
 				    "Año", YEAR([Date]),
-				    "Número de Año", "A" & FORMAT([Date], "YYYY"),  -- Ej: "A2023"
-				    "Semestre", "S" & IF(MONTH([Date]) <= 6, 1, 2),  -- S1 o S2
-				    "Trimestre", "T" & FORMAT([Date], "Q"),         -- T1, T2, T3, T4
-				    "Mes", FORMAT([Date], "MMMM"),                  -- "Enero", "Febrero", etc.
-				    "Mes Corto", FORMAT([Date], "MMM"),             -- "Ene", "Feb", etc.
-				    "Número de Mes", MONTH([Date]),                 -- 1 a 12
-				    "Día del Mes", DAY([Date]),                     -- 1 a 31
+				    "Número de Año", "A" & FORMAT([Date], "YYYY"),
+				    "Semestre", "S" & IF(MONTH([Date]) <= 6, 1, 2),
+				    "Trimestre", "T" & FORMAT([Date], "Q"),
+				    "Mes", FORMAT([Date], "MMMM"),
+				    "Mes Corto", FORMAT([Date], "MMM"),
+				    "Número de Mes", MONTH([Date]),
+				    "Día del Mes", DAY([Date]),
 				    "Día del Año", DATEDIFF(DATE(YEAR([Date]), 1, 1), [Date], DAY) + 1,
-				    -- Inteligencia de tiempo
-				    "Día de la Semana", FORMAT([Date], "dddd"),      -- "Lunes", "Martes", etc.
-				    "Día de la Semana Corto", FORMAT([Date], "ddd"), -- "Lun", "Mar", etc.
-				    "Número de Día de la Semana", WEEKDAY([Date], 2), -- 1 (Lunes) a 7 (Domingo)
+				    "Día de la Semana", FORMAT([Date], "dddd"),
+				    "Día de la Semana Corto", FORMAT([Date], "ddd"),
+				    "Número de Día de la Semana", WEEKDAY([Date], 2),
 				    "Fin de Semana", IF(WEEKDAY([Date], 2) > 5, "Sí", "No"),
-				    
-				    -- Columnas útiles para análisis
-				    "Año-Mes", FORMAT([Date], "YYYY-MM"),           -- "2023-01"
+				    "Año-Mes", FORMAT([Date], "YYYY-MM"), 
 				    "Año-Trimestre", FORMAT([Date], "YYYY") & "-T" & FORMAT([Date], "Q"),
-				    "Fecha Completa", FORMAT([Date], "dd/MM/yyyy")   -- Formato legible
+				    "Fecha Completa", FORMAT([Date], "dd/MM/yyyy")
 				)
-				    --CALENDAR(MIN('FACT VENTAS'[FechaOrden]), MAX('FACT VENTAS'[FechaEntrega]))))
 				```
 
 	annotation PBI_Id = 36b7c5069f7a435586b12f7b9dc2d41d
