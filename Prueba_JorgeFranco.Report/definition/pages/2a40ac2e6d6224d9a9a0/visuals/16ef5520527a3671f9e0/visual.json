@@ -1,0 +1,120 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.6.0/schema.json",
+  "name": "16ef5520527a3671f9e0",
+  "position": {
+    "x": 0,
+    "y": 123.63636363636363,
+    "z": 10000,
+    "height": 235.45454545454544,
+    "width": 1118.181818181818,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM CALENDARIO"
+                    }
+                  },
+                  "Property": "Mes Corto"
+                }
+              },
+              "queryRef": "DIM CALENDARIO.Mes Corto",
+              "nativeQueryRef": "Mes Corto",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "Ventas MTD"
+                }
+              },
+              "queryRef": "MEDIDAS.Ventas MTD",
+              "nativeQueryRef": "Ventas MTD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "Ventas YTD"
+                }
+              },
+              "queryRef": "MEDIDAS.Ventas YTD",
+              "nativeQueryRef": "Ventas YTD"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "Margen MTD"
+                }
+              },
+              "queryRef": "MEDIDAS.Margen MTD",
+              "nativeQueryRef": "Margen MTD"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "Margen YTD"
+                }
+              },
+              "queryRef": "MEDIDAS.Margen YTD",
+              "nativeQueryRef": "Margen YTD"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM CALENDARIO"
+                  }
+                },
+                "Property": "Mes Corto"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

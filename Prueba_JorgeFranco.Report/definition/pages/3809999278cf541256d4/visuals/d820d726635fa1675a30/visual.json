@@ -1,0 +1,82 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.6.0/schema.json",
+  "name": "d820d726635fa1675a30",
+  "position": {
+    "x": 218.18181818181816,
+    "y": 282.72727272727269,
+    "z": 0,
+    "height": 153.63636363636363,
+    "width": 843.63636363636351,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Productos:",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": " las visualizaciones de esta página ayudaran al proceso de evaluación de demanda por categoría de productos y el margen de estas. Tiene el objetivo de brindar un vistazo al movimiento de productos por tienda, estado y país."
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Clientes",
+                    "textStyle": {
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": ": las visualizaciones de esta pagina se han hecho para conocer la distribución de clientes que posee la empresa por país y ciudad, su distribución "
+                  },
+                  {
+                    "value": "y el crecimiento de ventas ",
+                    "textStyle": {
+                      "fontSize": "13.3333px"
+                    }
+                  },
+                  {
+                    "value": "por genero."
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "El Slide del punto 3, correspondiente al análisis de descuentos no lo pude hacer debido a que no habían datos de descuentos en la base de datos."
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -132,6 +132,12 @@ table 'DIM CLIENTE'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column ClienteNombreCompleto = 'DIM CLIENTE'[Cliente1erNombre] & " " &'DIM CLIENTE'[ClienteInicial2doNombre] & ". " & 'DIM CLIENTE'[ClienteApellido]
+		lineageTag: ac431719-b4e9-4cf6-92ce-dec18810a2aa
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'DIM CLIENTE' = m
 		mode: import
 		queryGroup: Dimensiones

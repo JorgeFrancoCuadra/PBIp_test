@@ -8,6 +8,181 @@
     }
   },
   "layoutOptimization": "None",
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2ec6fa7d20d206f56971",
+        "displayName": "Tienda - Pais",
+        "ordinal": 0,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM TIENDA"
+              }
+            },
+            "Property": "TiendaPais"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "8dceb707dc41a1565a63",
+        "displayName": "Tienda - Estado",
+        "ordinal": 1,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM TIENDA"
+              }
+            },
+            "Property": "TiendaNombreEstado"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "ddcb392c592dcff8e839",
+        "displayName": "Tienda",
+        "ordinal": 2,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM TIENDA"
+              }
+            },
+            "Property": "TiendaNombre"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "c65563e22828295f694d",
+        "displayName": "Producto - Categoría",
+        "ordinal": 3,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM PRODUCTO"
+              }
+            },
+            "Property": "CategoriaNombre"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "532544ab2eb48eb4c47e",
+        "displayName": "Producto - Subcategoría",
+        "ordinal": 4,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM PRODUCTO"
+              }
+            },
+            "Property": "Subcategoria"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "1f9be54189c8debf4908",
+        "displayName": "Producto - Marca",
+        "ordinal": 5,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM PRODUCTO"
+              }
+            },
+            "Property": "Marca"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "a67abf8dae3fde81c191",
+        "displayName": "Producto",
+        "ordinal": 6,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM PRODUCTO"
+              }
+            },
+            "Property": "ProductoNombre"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "faf84d1a0d8745458a8f",
+        "displayName": "Cliente - País",
+        "ordinal": 7,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM CLIENTE"
+              }
+            },
+            "Property": "ClientePais"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "704452871d4cd9300a65",
+        "displayName": "Cliente - Estado",
+        "ordinal": 8,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM CLIENTE"
+              }
+            },
+            "Property": "ClienteEstado"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      },
+      {
+        "name": "82e9997e3b110987b063",
+        "displayName": "Cliente - Nombre Completo",
+        "ordinal": 9,
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM CLIENTE"
+              }
+            },
+            "Property": "ClienteNombreCompleto"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      }
+    ],
+    "filterSortOrder": "Custom"
+  },
   "objects": {
     "section": [
       {

@@ -1,0 +1,48 @@
+table 'Switch Medida'
+	lineageTag: 95d8fce2-3748-45ed-9aa5-4d8c5d18a746
+
+	measure 'Switch Medida' =
+			SWITCH(
+			    SELECTEDVALUE('Switch Medida'[Codigo],1),
+			    1, FORMAT([Ventas USD], "$#,##0.00"),
+			    2, FORMAT([Margen USD], "$#,##0.00"),
+			    3, FORMAT([Var Ventas], "$#,##0.00"),
+			    4, FORMAT([Delta Ventas], "0.00%"),
+			    5, FORMAT([Kilogramos], "#,##")
+			)
+		lineageTag: f2af1b72-8ac2-496d-b95c-bce410fccfb3
+
+	column Codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: e6ac28c9-ab28-4923-84de-2e59a756162c
+		summarizeBy: sum
+		sourceColumn: Codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Medida
+		dataType: string
+		lineageTag: f4d44b6b-5e42-492a-bdcd-d70ed3a1e3f6
+		summarizeBy: none
+		sourceColumn: Medida
+		sortByColumn: Codigo
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Switch Medida' = m
+		mode: import
+		queryGroup: Medidas
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlTSUQpLzStJLFaK1YlWMgJyfROL0lPzwFxjkGxiUWZicubhzRAhE6CQc1FqcmZuJlBbPljMFCjmnZmTn16UmJsPNCgWAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Codigo = _t, Medida = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Codigo", Int64.Type}, {"Medida", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

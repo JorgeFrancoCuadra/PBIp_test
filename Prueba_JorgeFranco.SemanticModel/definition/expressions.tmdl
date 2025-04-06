@@ -1,12 +1,18 @@
 /// Dirección del servidor
 expression srvName = "tdw-assesment.cwb0siyssle1.us-east-1.rds.amazonaws.com" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: c676b1be-cbe4-4a89-8837-4ac8a3ef376f
+	queryGroup: Parametros
 
 	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navegación
 
 /// Base de datos
 expression dbName = "assesment" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 47c86f11-d373-4cac-8e00-8d92d4abc5eb
+	queryGroup: Parametros
 
 	annotation PBI_ResultType = Text
+
+	annotation PBI_NavigationStepName = Navegación
 

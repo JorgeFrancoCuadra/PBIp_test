@@ -56,7 +56,7 @@ table MEDIDAS
 		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
 
 	measure 'Cantidad Clientes' = DISTINCTCOUNT('FACT VENTAS'[CustomerKey])
-		formatString: 0
+		formatString: #,0
 		displayFolder: Medidas Auxiliares
 		lineageTag: f236bf41-654f-4c08-bb57-875539bd7c05
 
@@ -663,8 +663,71 @@ table MEDIDAS
 		displayFolder: Ticket Promedio YTD
 		lineageTag: 7909f4b3-27d1-4c19-a643-7be9d8a90c1a
 
+	measure 'Margen Promedio' = DIVIDE([Margen USD], [Cantidad])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Margen Promedio
+		lineageTag: d04de4d1-03b3-4161-adf9-bf0c78b6cfc5
+
+	measure 'Margen Promedio Cliente' = DIVIDE([Margen USD], [Cantidad Clientes])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Margen Promedio Cliente
+		lineageTag: d83f539e-f967-4d5c-854e-bb31580d5977
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-US"}
+
+	measure 'Margen Promedio AA' = CALCULATE([Margen Promedio], SAMEPERIODLASTYEAR('DIM CALENDARIO'[Date]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Margen Promedio
+		lineageTag: 411d835a-134b-4232-8b45-e410b9207faa
+
+	measure 'Var Margen Promedio' = [Margen Promedio] - [Margen Promedio AA]
+		displayFolder: Margen Promedio
+		lineageTag: 90a33b1c-db95-4950-9e9c-7a639b012440
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Delta Margen Promedio' = DIVIDE([Var Margen Promedio], [Margen Promedio])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Margen Promedio
+		lineageTag: 643ed32b-8de1-4800-9a29-1d426744b394
+
+	measure 'Margen Promedio Cliente AA' = CALCULATE([Margen Promedio Cliente], SAMEPERIODLASTYEAR('DIM CALENDARIO'[Date]))
+		formatString: \$#,0.00;-\$#,0.00;\$#,0.00
+		displayFolder: Margen Promedio Cliente
+		lineageTag: 65ab30e9-fe7b-42a9-a8ba-4981808867fb
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-SV"}
+
+	measure 'Var Margen Promedio Cliente' = [Margen Promedio Cliente] - [Margen Promedio Cliente AA]
+		formatString: \$#,0.00;-\$#,0.00;\$#,0.00
+		displayFolder: Margen Promedio Cliente
+		lineageTag: c69a1979-54b1-47a4-9ce2-97a28e66d5b7
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-SV"}
+
+	measure 'Delta Margen Promedio Cliente' = DIVIDE([Var Margen Promedio Cliente], [Margen Promedio Cliente])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Margen Promedio Cliente
+		lineageTag: 4192b30d-f3aa-41d5-a87f-c97ccbf5f67c
+
+	measure 'Venta Participación' = DIVIDE([Ventas USD], CALCULATE([Ventas USD], ALLSELECTED('DIM TIENDA')))
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Medidas auxiliares
+		lineageTag: a300e1fb-0cba-4b4e-8740-58e106c972f7
+
+	measure 'Margen Actual' = DIVIDE([Ventas USD] - [Costo USD], [Ventas USD])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		displayFolder: Medidas auxiliares
+		lineageTag: 70dc7396-c897-460a-8fbd-0c0f0bf17a73
+
+	measure 'Precio Promedio Unidades' = DIVIDE([Ventas USD], [Cantidad])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Medidas auxiliares
+		lineageTag: 9d1451be-300e-4412-8c22-e2005bf2838c
+
 	partition MEDIDAS = m
 		mode: import
+		queryGroup: Medidas
 		source =
 				let
 				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
@@ -674,4 +737,6 @@ table MEDIDAS
 				    #"Columnas quitadas"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
 

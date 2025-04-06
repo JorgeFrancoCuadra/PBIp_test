@@ -8,17 +8,25 @@ model Model
 
 queryGroup Dimensiones
 
-	annotation PBI_QueryGroupOrder = 0
+	annotation PBI_QueryGroupOrder = 1
 
 queryGroup Hechos
 
-	annotation PBI_QueryGroupOrder = 1
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup Parametros
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup Medidas
+
+	annotation PBI_QueryGroupOrder = 3
 
 annotation PBI_ProTooling = ["DevMode"]
 
 annotation PBIDesktopVersion = 2.141.1253.0 (25.03)+74f9999a1e95f78c739f3ea2b96ba340e9ba8729
 
-annotation PBI_QueryOrder = ["srvName","dbName","DIM PRODUCTO","DIM TIENDA","DIM CLIENTE","FACT VENTAS","MEDIDAS"]
+annotation PBI_QueryOrder = ["srvName","dbName","DIM PRODUCTO","DIM TIENDA","DIM CLIENTE","FACT VENTAS","MEDIDAS","Switch Medida"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -31,6 +39,7 @@ ref table 'FACT VENTAS'
 ref table LocalDateTable_7958707a-8669-414b-9286-021431e3536c
 ref table 'DIM CALENDARIO'
 ref table MEDIDAS
+ref table 'Switch Medida'
 ref table LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2
 
 ref cultureInfo es-SV

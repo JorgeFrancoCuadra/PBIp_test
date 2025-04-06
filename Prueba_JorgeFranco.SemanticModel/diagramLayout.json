@@ -4,14 +4,14 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 299.07295923568142,
+        "x": 0,
         "y": 0
       },
       "nodes": [
         {
           "location": {
             "x": 654.74410590548189,
-            "y": 349.30388788852076
+            "y": 358.74103954484929
           },
           "nodeIndex": "DIM CLIENTE",
           "nodeLineageTag": "261059f3-002e-49fc-9f8a-16cc0da25695",
@@ -25,7 +25,7 @@
         {
           "location": {
             "x": 71.256029591478722,
-            "y": 306.39826657103191
+            "y": 315.83541822736044
           },
           "nodeIndex": "DIM PRODUCTO",
           "nodeLineageTag": "a8a399b4-2cd7-4716-8f10-909332e3795f",
@@ -39,7 +39,7 @@
         {
           "location": {
             "x": 295.27560122566558,
-            "y": 559.84983346601041
+            "y": 569.28698512233893
           },
           "nodeIndex": "DIM TIENDA",
           "nodeLineageTag": "866c0894-c56b-452a-997b-22b117051d5a",
@@ -53,7 +53,7 @@
         {
           "location": {
             "x": 370.73780018578503,
-            "y": 305.67181917745131
+            "y": 315.10897083377984
           },
           "nodeIndex": "FACT VENTAS",
           "nodeLineageTag": "1a3aa265-5557-4147-b845-aa0583d36073",
@@ -67,7 +67,7 @@
         {
           "location": {
             "x": 327.96043987321053,
-            "y": 127.53617754887239
+            "y": 136.97332920520091
           },
           "nodeIndex": "DIM CALENDARIO",
           "nodeLineageTag": "efc9dd15-2135-477d-a80e-c3fe36477f53",
@@ -81,12 +81,25 @@
         {
           "location": {
             "x": 710.7248580768478,
-            "y": 18.874303312657027
+            "y": 28.311454968985551
           },
           "nodeIndex": "MEDIDAS",
           "nodeLineageTag": "95de2438-3620-44b0-b84b-ff1baad57a9e",
           "size": {
             "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 923.468828485369,
+            "y": 267.9249167330052
+          },
+          "nodeIndex": "Switch Medida",
+          "nodeLineageTag": "95d8fce2-3748-45ed-9aa5-4d8c5d18a746",
+          "size": {
+            "height": 128,
             "width": 234
           },
           "zIndex": 0

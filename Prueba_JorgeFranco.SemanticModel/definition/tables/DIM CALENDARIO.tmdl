@@ -10,7 +10,7 @@ table 'DIM CALENDARIO'
 
 		variation Variación
 			isDefault
-			relationship: ff6d7827-9d0e-4f8a-8295-34ccf3124909
+			relationship: fe9dc665-b3bd-4839-a037-7b156f656ede
 			defaultHierarchy: LocalDateTable_a14762af-4967-430b-8285-08d5659d62c2.'Jerarquía de fechas'
 
 		annotation SummarizationSetBy = Automatic
@@ -53,6 +53,7 @@ table 'DIM CALENDARIO'
 		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Mes]
+		sortByColumn: 'Número de Mes'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -61,6 +62,7 @@ table 'DIM CALENDARIO'
 		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Mes Corto]
+		sortByColumn: 'Número de Mes'
 
 		annotation SummarizationSetBy = Automatic
 
@@ -148,6 +150,15 @@ table 'DIM CALENDARIO'
 
 		annotation SummarizationSetBy = Automatic
 
+	column AñoMes
+		formatString: 0
+		lineageTag: a4479b5c-e08a-4301-a81a-76b0a972a932
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [AñoMes]
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'DIM CALENDARIO' = calculated
 		mode: import
 		source = ```
@@ -168,7 +179,8 @@ table 'DIM CALENDARIO'
 				    "Fin de Semana", IF(WEEKDAY([Date], 2) > 5, "Sí", "No"),
 				    "Año-Mes", FORMAT([Date], "YYYY-MM"), 
 				    "Año-Trimestre", FORMAT([Date], "YYYY") & "-T" & FORMAT([Date], "Q"),
-				    "Fecha Completa", FORMAT([Date], "dd/MM/yyyy")
+				    "Fecha Completa", FORMAT([Date], "dd/MM/yyyy"),
+				    "AñoMes", YEAR([Date])*100+MONTH([Date])
 				)
 				```
 
