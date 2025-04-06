@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "DIM TIENDA.TiendaNombreEstado",
-              "nativeQueryRef": "TiendaNombreEstado"
+              "nativeQueryRef": "Estado",
+              "displayName": "Estado"
             },
             {
               "field": {

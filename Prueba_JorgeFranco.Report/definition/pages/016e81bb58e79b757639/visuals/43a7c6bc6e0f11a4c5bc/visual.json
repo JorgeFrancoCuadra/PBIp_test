@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "DIM PRODUCTO.CategoriaNombre",
-              "nativeQueryRef": "CategoriaNombre"
+              "nativeQueryRef": "ProductoCategoria",
+              "displayName": "ProductoCategoria"
             },
             {
               "field": {
